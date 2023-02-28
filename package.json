@@ -5,16 +5,18 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "next lint",
+    "format": "next lint && prettier . --write",
     "start": "next start"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.24.10",
     "next": "^13.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "zod": "^3.20.6"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^4.24.12",
     "@types/eslint": "^8.21.1",
     "@types/node": "^18.14.0",
     "@types/prettier": "^2.7.2",
