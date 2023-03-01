@@ -1,51 +1,34 @@
 import { usePosts } from '@/hooks/usePosts'
-import Image from 'next/image'
-import { useState } from 'react'
+import { curiousProfile } from '@/schemas/curiousProfile'
+import { Anonymous } from './anonymous'
+import { ProfileAvatar } from './profileavatar'
+import { UserPanel } from './userpanel'
 
 export const Profile = ({ username }: { username: string }) => {
-  const { data, isLoading } = usePosts(username)
+  const { data } = usePosts(username)
 
-  const [error, setError] = useState<boolean>(false)
+  const userData = curiousProfile.safeParse(data?.pages[0]?.data)
 
-  if (!data) return <></>
+  if (!userData.success) return <Anonymous username={username} />
 
   return (
     <>
       <div>
         <div
           className="flex h-[200px] w-full items-center justify-center break-normal bg-center"
-          style={{ backgroundImage: `url(${data?.banner})` }}
+          style={{ backgroundImage: `url(${userData?.data.banner || ''})` }}
         >
-          {error || isLoading ? (
-            <div className="relative top-[80px] h-[120px] w-[120px] rounded-full border-[11px] border-dark bg-medium" />
-          ) : (
-            <Image
-              src={data?.avatar || '/images/placeholder.png'}
-              height={120}
-              width={120}
-              className="relative top-[80px] rounded-full border-[11px] border-dark"
-              onError={() => setError(true)}
-              alt={`${data?.username || 'temp.png'} avatar image`}
-            />
-          )}
+          <ProfileAvatar
+            avatar={userData?.data?.avatar}
+            username={userData?.data?.username}
+          />
         </div>
-        <div className="flex h-[180px] w-full flex-col items-center break-normal bg-dark pt-10 text-gray">
-          <span className="text-3xl font-semibold">{data?.username}</span>
-          <div className="mt-2.5 mb-5 flex w-full justify-between px-5">
-            <span className="text-center">
-              <p className="text-2xl">{data?.followers_count}</p>
-              <p className="text-sm">Followers</p>
-            </span>
-            <span className="text-center">
-              <p className="text-2xl">{data?.userData?.answers}</p>
-              <p className="text-sm">Answers</p>
-            </span>
-            <span className="text-center">
-              <p className="text-2xl">{data?.following_count}</p>
-              <p className="text-sm">Following</p>
-            </span>
-          </div>
-        </div>
+        <UserPanel
+          answers={userData.data.answers}
+          followers_count={userData.data.followers_count}
+          following_count={userData.data.following_count}
+          username={userData.data.username}
+        />
       </div>
     </>
   )
