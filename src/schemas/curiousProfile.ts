@@ -11,7 +11,7 @@ export const userData = z.object({
   askboxtext: z.unknown(),
   avatar: z.string(),
   banner: z.string(),
-  following: z.boolean(),
+  following: z.boolean().or(z.number()).optional(),
   follows_you: z.boolean(),
   is_followed_by_me: z.boolean(),
   is_following_me: z.boolean(),
@@ -37,9 +37,11 @@ export const post = z.object({
     .object({
       w: z.number(),
       h: z.number(),
-      img: z.string()
+      img: z.string().optional(),
+      mp4: z.string().optional()
     })
-    .or(z.null()),
+    .or(z.null())
+    .optional(),
   senderData: userData.or(senderData),
   addresseeData: userData
 })
@@ -48,21 +50,29 @@ export type PostContent = z.infer<z.Schema<typeof post>>
 
 export const posts = z.array(z.object({ type: z.string(), post })).optional()
 
+export const apiError = z.object({
+  error: z.number(),
+  errorCode: z.string(),
+  error_code: z.string()
+})
+
 export const curiousProfile = z.object({
   id: z.number(),
   twitterid: z.string().or(z.boolean()),
-  facebookid: z.boolean().or(z.boolean()),
-  facebooklink: z.boolean().or(z.boolean()),
+  facebookid: z.string().or(z.boolean()),
+  facebooklink: z.string().or(z.boolean()),
   username: z.string(),
   verified: z.boolean(),
-  followers: z.number(),
-  following_count: z.number(),
-  followers_count: z.number(),
+  followers: z.number().optional(),
+  following_count: z.number().optional(),
+  followers_count: z.number().optional(),
   answers: z.number(),
   avatar: z.string(),
   banner: z.string(),
-  following: z.number(),
+  following: z.boolean().or(z.number()).optional(),
   created_at: z.number(),
   posts,
   userData
 })
+
+export const apiReturn = apiError.or(curiousProfile)
