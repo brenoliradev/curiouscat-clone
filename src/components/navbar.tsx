@@ -1,10 +1,19 @@
 import Image from 'next/image'
+import { useState } from 'react'
+import { SearchNav } from './searchnav'
 
 export const Navbar = () => {
+  const [isSearching, setIsSearching] = useState<boolean>(false)
+
+  const stopSearching = () => setIsSearching(false)
+
   return (
-    <nav className="fixed h-16 w-full border-b-[1px] border-b-medium bg-dark px-2.5 z-10">
+    <nav className="fixed z-10 h-16 w-full border-b-[1px] border-b-medium bg-dark px-2.5">
       <div className="mx-auto flex h-16 w-full max-w-[890px] items-center justify-between">
-        <button className="min-w-[105px] rounded-2xl border-[1px] border-gray bg-transparent p-2.5 text-[12px] font-medium text-gray lg:min-w-[115px]">
+        <button
+          onClick={() => setIsSearching(!isSearching)}
+          className="min-w-[105px] rounded-2xl border-[1px] border-gray bg-transparent p-2.5 text-[12px] font-medium text-gray lg:min-w-[115px]"
+        >
           Search users
         </button>
         <Image
@@ -25,6 +34,7 @@ export const Navbar = () => {
           Contact me
         </button>
       </div>
+      <SearchNav isSearching={isSearching} stopSearching={stopSearching} />
     </nav>
   )
 }
