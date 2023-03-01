@@ -21,7 +21,7 @@ const config = {
     defaultLocale: 'en'
   },
   images: {
-    domains: ['aws.curiouscat.me']
+    domains: ['aws.curiouscat.me', 'media.tenor.com']
   }
 }
 export default config
