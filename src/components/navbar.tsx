@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export const Navbar = () => {
   return (
-    <nav className="fixed h-16 w-full border-b-[1px] border-b-medium bg-dark px-2.5">
+    <nav className="fixed h-16 w-full border-b-[1px] border-b-medium bg-dark px-2.5 z-10">
       <div className="mx-auto flex h-16 w-full max-w-[890px] items-center justify-between">
         <button className="min-w-[105px] rounded-2xl border-[1px] border-gray bg-transparent p-2.5 text-[12px] font-medium text-gray lg:min-w-[115px]">
           Search users
