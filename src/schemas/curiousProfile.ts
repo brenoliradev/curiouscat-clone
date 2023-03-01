@@ -21,10 +21,12 @@ export const userData = z.object({
   last_online: z.unknown()
 })
 
-export const senderData = z.object({
-  id: z.boolean(),
-  avatar: z.string()
-})
+export const senderData = z
+  .object({
+    id: z.boolean(),
+    avatar: z.string()
+  })
+  .or(userData)
 
 export const post = z.object({
   id: z.number(),
@@ -42,7 +44,7 @@ export const post = z.object({
     })
     .or(z.null())
     .optional(),
-  senderData: userData.or(senderData),
+  senderData,
   addresseeData: userData
 })
 
