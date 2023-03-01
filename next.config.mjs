@@ -19,6 +19,9 @@ const config = {
   i18n: {
     locales: ['en'],
     defaultLocale: 'en'
+  },
+  images: {
+    domains: ['aws.curiouscat.me']
   }
 }
 export default config
