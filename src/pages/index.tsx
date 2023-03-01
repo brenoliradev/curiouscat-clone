@@ -1,25 +1,16 @@
 import { Feed } from '@/components/feed'
 import { Navbar } from '@/components/navbar'
+import { Profile } from '@/components/profile'
 import { usePosts } from '@/hooks/usePosts'
-import { curiousProfile } from '@/schemas/curiousProfile'
-import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { PrefetchProfile } from '@/server/prefetchProfile'
 import { type GetServerSideProps, type NextPage } from 'next'
 import Head from 'next/head'
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const queryClient = new QueryClient()
-
-  await queryClient.prefetchQuery(
-    ['curiouscat-posts', { username: 'brenoliradev' }],
-    () =>
-      fetch(`https://curiouscat.live/api/v2.1/profile?username=brenoliradev`)
-        .then((res) => res.json())
-        .then((r) => curiousProfile.parse(r))
-        .catch((error) => console.log(error))
-  )
+  const _dehydrate = await PrefetchProfile('brenoliradev')
 
   return {
-    props: { dehydratedState: dehydrate(queryClient) }
+    props: { dehydratedState: _dehydrate }
   }
 }
 
@@ -37,7 +28,10 @@ const Home: NextPage = () => {
       </Head>
       <main className="min-h-screen w-full bg-medium">
         <Navbar />
-        <Feed username="brenoliradev" />
+        <section className="mx-auto flex w-full max-w-[890px] flex-col pt-16">
+          <Profile username="brenoliradev" />
+          <Feed username="brenoliradev" />
+        </section>
       </main>
     </>
   )

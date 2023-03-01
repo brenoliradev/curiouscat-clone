@@ -1,28 +1,19 @@
 import { Feed } from '@/components/feed'
 import { Navbar } from '@/components/navbar'
+import { Profile } from '@/components/profile'
 import { usePosts } from '@/hooks/usePosts'
-import { curiousProfile } from '@/schemas/curiousProfile'
-import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { PrefetchProfile } from '@/server/prefetchProfile'
 import { type GetServerSideProps, type NextPage } from 'next'
 import Head from 'next/head'
 import { z } from 'zod'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const queryClient = new QueryClient()
-
   const username = z.string().parse(ctx.query.username)
 
-  await queryClient.prefetchQuery(['curiouscat-posts', { username }], () =>
-    fetch(
-      `https://curiouscat.live/api/v2.1/profile?username=${String(username)}`
-    )
-      .then((res) => res.json())
-      .then((r) => curiousProfile.parse(r))
-      .catch((error) => console.log(error))
-  )
+  const _dehydrate = await PrefetchProfile(username)
 
   return {
-    props: { dehydratedState: dehydrate(queryClient), username }
+    props: { dehydratedState: _dehydrate, username }
   }
 }
 
@@ -44,7 +35,10 @@ const Userpage: NextPage<{ username: string }> = ({
       </Head>
       <main className="min-h-screen min-w-full bg-medium">
         <Navbar />
-        <Feed username={username} />
+        <section className="mx-auto flex w-full max-w-[890px] flex-col pt-16">
+          <Profile key={username} username={username} />
+          <Feed username={username} />
+        </section>
       </main>
     </>
   )
