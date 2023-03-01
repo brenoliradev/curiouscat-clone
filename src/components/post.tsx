@@ -40,7 +40,7 @@ export const Post = ({
 
   return (
     <div className="w-full bg-dark p-2.5">
-      <p className="text-gray">{postContent.comment}</p>
+      <p className="text-gray break-words">{postContent.comment}</p>
       <p className="text-sm text-primary">
         {isVisible.success ? isVisible.data.username : 'Anonymous'}
       </p>
@@ -61,7 +61,7 @@ export const Post = ({
           </p>
         </div>
       </div>
-      <p className="text-gray">{postContent.reply}</p>
+      <p className="text-gray break-words">{postContent.reply}</p>
       <div className="mt-4 border-t-[1px] border-t-medium pt-2.5">
         <span className="flex gap-1.5">
           <Image
