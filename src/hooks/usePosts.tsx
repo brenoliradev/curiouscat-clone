@@ -1,15 +1,36 @@
 import { curiousProfile } from '@/schemas/curiousProfile'
-import { useQuery } from '@tanstack/react-query'
+import { fetchPosts } from '@/server/fetchPost'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { z } from 'zod'
 
-export const usePosts = (username: string) => {
-  const { data, isLoading, isError } = useQuery(
+const usePosts = (username: string) => {
+  const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     ['curiouscat-posts', { username }],
-    () =>
-      fetch(`https://curiouscat.live/api/v2.1/profile?username=${username}`)
-        .then((res) => res.json())
-        .then((r) => curiousProfile.parse(r))
-        .catch((error) => console.log(error))
+    ({ pageParam }) => {
+      const timestamp = z.number().safeParse(pageParam)
+
+      if (timestamp.success) {
+        return fetchPosts({ username, pageParams: timestamp.data })
+      }
+
+      return fetchPosts({ username })
+    },
+    {
+      getNextPageParam: (lastPage) => {
+        const profileData = curiousProfile.safeParse(lastPage?.data)
+
+        if (profileData && profileData.success) {
+          return profileData.data.posts?.at(-1)?.post.timestamp
+        }
+
+        return null
+      }
+    }
   )
 
-  return { data, isLoading, isError }
+  const userData = curiousProfile.safeParse(data?.pages[0]?.data)
+
+  return { data, isLoading, isError, fetchNextPage, userData }
 }
+
+export { usePosts }
