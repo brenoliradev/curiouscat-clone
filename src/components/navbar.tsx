@@ -30,9 +30,14 @@ export const Navbar = () => {
           alt="Curious write in gray and Cat write in orange"
           className="block lg:hidden"
         />
-        <button className="min-w-[105px] rounded-2xl bg-primary p-2.5 text-[12px] font-medium lg:min-w-[115px]">
+        <a
+          href="https://www.linkedin.com/in/lirbre/"
+          target="_blank"
+          rel="noreferrer"
+          className="min-w-[105px] rounded-2xl bg-primary p-2.5 text-center text-[12px] font-medium lg:min-w-[115px]"
+        >
           Contact me
-        </button>
+        </a>
       </div>
       <SearchNav isSearching={isSearching} stopSearching={stopSearching} />
     </nav>
