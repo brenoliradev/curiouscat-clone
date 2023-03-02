@@ -1,9 +1,8 @@
 import { type post } from '@/schemas/curiousProfile'
 import Image from 'next/image'
 import { type z } from 'zod'
-import { Comment } from './comment'
-import { Repply } from './repply'
 import { Adressee } from './adressee'
+import { Message } from './message'
 import { Sender } from './sender'
 
 export const Post = ({
@@ -13,13 +12,13 @@ export const Post = ({
 }) => {
   return (
     <div className="w-full bg-dark p-2.5">
-      <Comment comment={postContent.comment} />
+      <Message message={postContent.comment} />
       <Sender sender={postContent.senderData} />
       <Adressee
         addresseeData={postContent.addresseeData}
         seconds_elapsed={postContent.seconds_elapsed}
       />
-      <Repply repply={postContent.reply} />
+      <Message message={postContent.reply} />
       {postContent.media && (
         <div className="mt-2.5 flex items-center justify-center">
           {postContent.media.img && !postContent.media.mp4 ? (
