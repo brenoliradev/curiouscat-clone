@@ -1,5 +1,6 @@
 import { type userData } from '@/schemas/curiousProfile'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import { type z } from 'zod'
 
@@ -56,7 +57,9 @@ export const Adressee = ({
         />
       )}
       <div>
-        <p className="text-base text-gray">{addresseeData.username}</p>
+        <Link href={`/${addresseeData.username}`} className="text-sm text-gray">
+          {addresseeData.username}
+        </Link>
         <p className="text-base text-light">
           {readableElapsed(seconds_elapsed)}
         </p>
