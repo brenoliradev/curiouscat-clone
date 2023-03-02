@@ -1,30 +1,16 @@
-# Create T3 App
+# Curiouscat Clone
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+- A simple App created as a [Challenge](https://twitter.com/zanfranceschi/status/1630207364405264385) using the [T3](https://create.t3.gg/) template as base. 
+- The motivation behind was to just test Zod and see how would be to parse things from another API (tbh I missed tRPC lol). 
+  - You can see alive [here](https://curiouscat-clone.vercel.app/) and compare it to [curiouscat](https://curiouscat.live/brenoliradev). 
 
-## What's next? How do I make an app with this?
+![image](https://user-images.githubusercontent.com/86065449/222268663-3a1939ff-ba1f-47df-8716-161a76f6c23b.png)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+-------------------------------------------
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
-
-# curiouscat-clone
+- Stack:
+  - react.js / next.js / typescript
+  - @tanstack/react-query to handle infinite querie and cache.
+  - zod to validate and parse data / schemas from curiouscat API.
+  - tailwind to styles and curiouscat UI as base.
+  - react-infinite-scroll-component to consume the infinite scroll and make things simple for me.
