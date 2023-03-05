@@ -18,7 +18,8 @@ export const userData = z.object({
   stickers: z.unknown(),
   created_at: z.number(),
   status_emoji: z.unknown(),
-  last_online: z.unknown()
+  last_online: z.unknown(),
+  followers: z.number().optional()
 })
 
 export const senderData = z
@@ -28,29 +29,42 @@ export const senderData = z
   })
   .or(userData)
 
-export const post = z.object({
-  id: z.number(),
-  likes: z.number(),
-  timestamp: z.number(),
-  seconds_elapsed: z.number(),
-  comment: z.string(),
-  reply: z.string(),
-  media: z
-    .object({
-      w: z.number(),
-      h: z.number(),
-      img: z.string().optional(),
-      mp4: z.string().optional()
-    })
-    .or(z.null())
-    .optional(),
-  senderData,
-  addresseeData: userData
-})
+export const post = z
+  .object({
+    id: z.number(),
+    likes: z.number(),
+    timestamp: z.number(),
+    seconds_elapsed: z.number(),
+    comment: z.string(),
+    reply: z.string(),
+    media: z
+      .object({
+        w: z.number(),
+        h: z.number(),
+        img: z.string().optional(),
+        mp4: z.string().optional()
+      })
+      .or(z.null())
+      .optional(),
+    senderData,
+    addresseeData: userData
+  })
+  .optional()
 
-export type PostContent = z.infer<z.Schema<typeof post>>
+export const status = z
+  .object({
+    author: userData,
+    emoji_id: z.number(),
+    id: z.number(),
+    status: z.string(),
+    timestamp: z.number(),
+    likes: z.number()
+  })
+  .optional()
 
-export const posts = z.array(z.object({ type: z.string(), post })).optional()
+export const posts = z
+  .array(z.object({ type: z.string(), post, status }))
+  .optional()
 
 export const apiError = z.object({
   error: z.number(),
