@@ -6,9 +6,11 @@ import { Message } from './message'
 import { Sender } from './sender'
 
 export const Post = ({
-  postContent
+  postContent,
+  verified
 }: {
-  postContent: z.infer<typeof post>
+  postContent: NonNullable<z.infer<typeof post>>
+  verified: boolean
 }) => {
   return (
     <div className="w-full bg-dark p-2.5">
@@ -17,6 +19,7 @@ export const Post = ({
       <Adressee
         addresseeData={postContent.addresseeData}
         seconds_elapsed={postContent.seconds_elapsed}
+        verified={verified}
       />
       <Message message={postContent.reply} />
       {postContent.media && (
