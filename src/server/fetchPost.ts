@@ -1,4 +1,5 @@
 import { apiError, curiousProfile } from '@/schemas/curiousProfile'
+import { type z } from 'zod'
 
 const fetchPosts = ({
   username,
@@ -23,7 +24,11 @@ const fetchPosts = ({
         posts.shift()
 
         return pageParams
-          ? { data: { ...parsed.data, posts: posts } }
+          ? {
+              data: { ...parsed.data, posts: posts } as z.infer<
+                typeof curiousProfile
+              >
+            }
           : { data: parsed.data }
       }
 

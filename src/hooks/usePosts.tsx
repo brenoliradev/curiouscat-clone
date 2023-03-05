@@ -1,6 +1,7 @@
-import { curiousProfile } from '@/schemas/curiousProfile'
+import { curiousProfile, userData } from '@/schemas/curiousProfile'
 import { fetchPosts } from '@/server/fetchPost'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 import { z } from 'zod'
 
 const usePosts = (username: string) => {
@@ -20,7 +21,7 @@ const usePosts = (username: string) => {
         const profileData = curiousProfile.safeParse(lastPage?.data)
 
         if (profileData && profileData.success) {
-          return profileData.data.posts?.at(-1)?.post.timestamp
+          return profileData.data.posts?.at(-1)?.post?.timestamp
         }
 
         return null
@@ -28,9 +29,15 @@ const usePosts = (username: string) => {
     }
   )
 
-  const userData = curiousProfile.safeParse(data?.pages[0]?.data)
+  const page = data?.pages[0]?.data
 
-  return { data, isLoading, isError, fetchNextPage, userData }
+  const user = useMemo(() => {
+    const temp = curiousProfile.safeParse(page)
+
+    return temp.success ? userData.safeParse(temp?.data?.userData) : null
+  }, [page])
+
+  return { data, isLoading, isError, fetchNextPage, user }
 }
 
 export { usePosts }
