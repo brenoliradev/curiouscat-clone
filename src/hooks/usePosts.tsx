@@ -34,7 +34,13 @@ const usePosts = (username: string) => {
   const user = useMemo(() => {
     const temp = curiousProfile.safeParse(page)
 
-    return temp.success ? userData.safeParse(temp?.data?.userData) : null
+    return temp.success
+      ? {
+          ...userData.safeParse(temp?.data?.userData),
+          followers_count: temp.data.followers_count,
+          following_count: temp.data.following_count
+        }
+      : null
   }, [page])
 
   return { data, isLoading, isError, fetchNextPage, user }

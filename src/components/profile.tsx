@@ -22,8 +22,8 @@ export const Profile = ({ username }: { username: string }) => {
         </div>
         <UserPanel
           answers={user?.data?.answers || 0}
-          followers_count={123}
-          following_count={123}
+          followers_count={user?.followers_count}
+          following_count={user?.following_count}
           username={user?.data?.username || ''}
           verified={user?.data?.verified || false}
         />
