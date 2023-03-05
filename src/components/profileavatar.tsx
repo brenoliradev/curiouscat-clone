@@ -14,7 +14,7 @@ export const ProfileAvatar = ({
     <div className="relative top-[80px] h-[120px] w-[120px] rounded-full border-[11px] border-dark bg-medium" />
   ) : (
     <Image
-      src={avatar || '/images/placeholder.png'}
+      src={avatar}
       height={120}
       width={120}
       className="relative top-[80px] rounded-full border-[11px] border-dark"
