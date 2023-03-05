@@ -6,7 +6,7 @@ import { UserPanel } from './userpanel'
 export const Profile = ({ username }: { username: string }) => {
   const { user } = usePosts(username)
 
-  if (user && !user.success) return <Anonymous username={username} />
+  if (!user || !user.success) return <Anonymous username={username} />
 
   return (
     <>
