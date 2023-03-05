@@ -21,7 +21,7 @@ export const Anonymous = ({ username }: { username: string }) => {
           </span>
         </div>
       </div>
-      <div className="pt-16">
+      <div className="pt-16 px-5">
         <p className="text-center text-gray">
           Sorry, this profile doesn&apos;t exist!
         </p>
