@@ -1,4 +1,5 @@
 import { Feed } from '@/components/feed'
+import { Floating } from '@/components/floating'
 import { Navbar } from '@/components/navbar'
 import { Profile } from '@/components/profile'
 import { usePosts } from '@/hooks/usePosts'
@@ -32,6 +33,7 @@ const Home: NextPage = () => {
           <Profile username="brenoliradev" />
           <Feed username="brenoliradev" />
         </section>
+        <Floating />
       </main>
     </>
   )
