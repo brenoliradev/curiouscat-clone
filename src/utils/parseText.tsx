@@ -1,9 +1,11 @@
+const urlRegex = /(?:https?:\/\/)(?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,}(?::\d{1,5})?(?:\/[\w-./?=&#%]*)?/gi
+
 export const parseText = (text: string) => {
   const escapedText = text
     .replaceAll(/</g, '&lt;')
     .replaceAll(/<[/]/g, '&lt;&#47;')
     .replaceAll(/>/g, '&gt;')
-  const textUrls = text?.match(/(https?:\/\/[^\s]+)/g)
+  const textUrls = text?.match(urlRegex)
 
   const textLinks = textUrls
     ? textUrls?.reduce((acc, url) => {
