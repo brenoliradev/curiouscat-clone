@@ -21,13 +21,9 @@ export const Anonymous = ({ username }: { username: string }) => {
           </span>
         </div>
       </div>
-      <div className="pt-16 px-5 text-center text-gray font-medium">
-        <p>
-          Sorry, this profile doesn&apos;t exist!
-        </p>
-        <p>
-          It might have been deactivated, or maybe it never existed.
-        </p>
+      <div className="px-5 pt-16 text-center font-medium text-gray">
+        <p>Sorry, this profile doesn&apos;t exist!</p>
+        <p>It might have been deactivated, or maybe it never existed.</p>
       </div>
     </div>
   )

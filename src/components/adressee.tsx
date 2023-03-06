@@ -30,7 +30,7 @@ export const Adressee = ({
           className="aspect-square rounded-full border-4"
         />
       )}
-      <div className='flex flex-col items-start'>
+      <div className="flex flex-col items-start">
         <Link
           href={`/${addresseeData.username}`}
           className="flex justify-center gap-0.5 text-sm font-semibold text-gray"
@@ -47,9 +47,7 @@ export const Adressee = ({
             <></>
           )}{' '}
         </Link>
-        <p className="text-sm text-light">
-          {readableElapsed(seconds_elapsed)}
-        </p>
+        <p className="text-sm text-light">{readableElapsed(seconds_elapsed)}</p>
       </div>
     </div>
   )

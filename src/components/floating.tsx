@@ -48,12 +48,12 @@ export const Floating = () => {
           >
             Contact me
           </a>
-          <p
+          <button
             onClick={() => setIsShown(false)}
-            className="text-xs text-gray underline opacity-90 lg:text-sm"
+            className="border-0 bg-transparent text-xs text-gray underline opacity-90 outline-0 lg:text-sm"
           >
             Dismiss
-          </p>
+          </button>
         </div>
       </div>
     </div>

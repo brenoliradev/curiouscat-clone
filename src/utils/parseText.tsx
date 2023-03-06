@@ -1,4 +1,5 @@
-const urlRegex = /(?:https?:\/\/)(?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,}(?::\d{1,5})?(?:\/[\w-./?=&#%]*)?/gi
+const urlRegex =
+  /(?:https?:\/\/)(?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,}(?::\d{1,5})?(?:\/[\w-./?=&#%]*)?/gi
 
 export const parseText = (text: string) => {
   const escapedText = text
