@@ -4,7 +4,7 @@ export const userData = z.object({
   id: z.number(),
   verified: z.boolean(),
   username: z.string(),
-  twitterid: z.string().or(z.boolean()),
+  twitterid: z.string().or(z.boolean()).or(z.number()),
   facebookid: z.string().or(z.boolean()),
   facebooklink: z.string().or(z.boolean()),
   answers: z.number(),
@@ -74,7 +74,7 @@ export const apiError = z.object({
 
 export const curiousProfile = z.object({
   id: z.number(),
-  twitterid: z.string().or(z.boolean()),
+  twitterid: z.string().or(z.boolean()).or(z.number()),
   facebookid: z.string().or(z.boolean()),
   facebooklink: z.string().or(z.boolean()),
   username: z.string(),
